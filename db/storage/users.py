@@ -14,7 +14,6 @@ class User:
     role: str
     first_name: str
     second_name: str
-    user_pic: str
 
 
 class UserStorage:
@@ -30,8 +29,7 @@ class UserStorage:
                 id BIGINT PRIMARY KEY,
                 role TEXT NOT NULL,
                 first_name TEXT NOT NULL,
-                second_name TEXT,
-                user_pic TEXT
+                second_name TEXT
             )
         """
         )
@@ -42,7 +40,7 @@ class UserStorage:
         )
         if data is None:
             return None
-        return User(data[0], data[1], data[2], data[3], data[4])
+        return User(data[0], data[1], data[2], data[3])
 
     async def promote_to_admin(self, user_id: int):
         await self._db.execute(
@@ -65,13 +63,12 @@ class UserStorage:
     async def create(self, user: User):
         await self._db.execute(
             f"""
-            INSERT INTO {self.__table} (id, role, first_name, second_name, user_pic) VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO {self.__table} (id, role, first_name, second_name) VALUES ($1, $2, $3, $4)
         """,
             user.id,
             user.role,
             user.first_name,
             user.second_name,
-            user.user_pic,
         )
 
     async def get_all_members(self) -> List[User]:
@@ -83,7 +80,7 @@ class UserStorage:
         if data is None:
             return None
         return [
-            User(user_data[0], user_data[1], user_data[2], user_data[3], user_data[4])
+            User(user_data[0], user_data[1], user_data[2], user_data[3])
             for user_data in data
         ]
 
