@@ -1,6 +1,6 @@
-# Message verificator
+# Message Verificator
 
-Storyteller is a project that generates a story from a random frame of your video. It uses machine learning algorithms to analyze the frame and generate a relevant story.
+This project features a Telegram bot that can send messages to any other user of the same bot, facilitating anonymous message exchanges.
 
 ## Prerequisites
 
@@ -22,23 +22,41 @@ git clone https://github.com/w1sq/message_verificator.git
 cd message_verificator
 ```
 
-3. Build the Docker image:
+1. Create and complete the [`.env`] file by copying the provided [`.env.example`] file and filling in the necessary values:
+
+```plaintext
+TGBOT_API_KEY=<your_telegram_bot_token_here>
+HOST=<your_database_host>
+PORT=<your_database_port>
+LOGIN=<your_database_login>
+PASSWORD=<your_database_password>
+DATABASE=<your_database_name>
+```
+
+-   `TGBOT_API_KEY`: Replace `<your_telegram_bot_token_here>` with your actual Telegram bot token, which you can obtain from the BotFather on Telegram.
+-   `HOST`: The hostname or IP address of your database server.
+-   `PORT`: The port number your database listens on.
+-   `LOGIN`: Your database login username.
+-   `PASSWORD`: Your database login password.
+-   `DATABASE`: The name of the database you want to connect to.
+
+4. Build the Docker image:
 
 ```bash
 docker build -t message_verificator .
 ```
 
-4. Run the Docker container:
+5. Run the Docker container:
 
 ```bash
 docker run -p 8501:8501 message_verificator
 ```
 
-After running these commands, open your web browser and navigate to Network URL from console to view the Streamlit app.
+After running these commands, the Telegram bot will be up and running.
 
 ## Usage
 
-Upload your video file in the Streamlit app. The app will select a random frame from the video, generate a story based on the frame, and display the story.
+Interact with the Telegram bot by choosing a receiver and sending a message to the bot. The bot will forward your message to recipent, allowing for anonymous message exchanges.
 
 ## Contributing
 
